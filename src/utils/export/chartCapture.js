@@ -14,6 +14,10 @@ export const captureExecutiveMetrics = async (isDarkMode, themeClassName, zip) =
   }
 
   try {
+    if (themeClassName) {
+      executiveMetricsEl.classList.add(themeClassName);
+    }
+
     const canvas = await html2canvas(executiveMetricsEl, {
       backgroundColor: isDarkMode ? '#1a1a2e' : '#ffffff',
       scale: 2,
@@ -27,5 +31,9 @@ export const captureExecutiveMetrics = async (isDarkMode, themeClassName, zip) =
     }
   } catch (error) {
     console.error('Error capturing executive metrics:', error);
+  } finally {
+    if (themeClassName) {
+      executiveMetricsEl.classList.remove(themeClassName);
+    }
   }
 };

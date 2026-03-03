@@ -171,5 +171,10 @@ export const captureCorrectiveActionReport = async (isDarkMode, zip) => {
     }
   } catch (error) {
     console.error('Error capturing corrective action report:', error);
+  } finally {
+    // Clean up temporary DOM element to prevent memory leaks
+    if (tempContainer.parentNode) {
+      document.body.removeChild(tempContainer);
+    }
   }
 };
